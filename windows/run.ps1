@@ -5,6 +5,8 @@ if (-not ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdenti
     exit
 }
 
+# TODO: WINGET SETUP
+
 Write-Host "Checking for winget updates..." -ForegroundColor Cyan
 
 # Check current winget version

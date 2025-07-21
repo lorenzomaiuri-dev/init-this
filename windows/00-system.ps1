@@ -112,7 +112,7 @@ $BloatwarePatterns = @(
 Remove-BloatwareAppx -AppPatterns $BloatwarePatterns
 
 # Set Power Plan to High Performance
-Write-Host "→ Setting power plan to High Performance..."
+Write-Host "Setting power plan to High Performance..."
 $highPerfPlan = powercfg -list | Where-Object { $_ -match "High performance" } | ForEach-Object { ($_ -split ' ')[3] }
 if ($highPerfPlan) {
     powercfg -setactive $highPerfPlan

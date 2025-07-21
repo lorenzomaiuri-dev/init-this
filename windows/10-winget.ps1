@@ -12,12 +12,12 @@ function Install-App {
 
     $installed = winget list --id $Id --source winget | Select-Object -Skip 1
     if ($installed) {
-        Write-Host "✔ $Name is already installed, skipping."
+        Write-Host "$Name is already installed, skipping."
     } else {
-        Write-Host "→ Installing $Name..."
+        Write-Host "Installing $Name..."
         try {
             winget install --id $Id --silent --accept-package-agreements --accept-source-agreements -ErrorAction Stop
-            Write-Host "✔ $Name installed successfully." -ForegroundColor Green
+            Write-Host "$Name installed successfully." -ForegroundColor Green
         } catch {
             Write-Host "Failed to install $Name: $_" -ForegroundColor Yellow
         }
@@ -114,7 +114,7 @@ Write-Host "Environment variables refreshed."
 
 foreach ($cmd in @("git", "python", "code", "pwsh", "node", "nvm")) {
     if (Get-Command $cmd -ErrorAction SilentlyContinue) {
-        Write-Host "✔ $cmd is available in PATH"
+        Write-Host "$cmd is available in PATH"
     } else {
         Write-Host "$cmd not found in PATH" -ForegroundColor Yellow
     }

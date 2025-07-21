@@ -1,7 +1,7 @@
 Write-Host "Configuring development environment..." -ForegroundColor Cyan
 
 # --- Git configuration ---
-Write-Host "→ Configuring Git..."
+Write-Host "Configuring Git..."
 git config --global user.name "Lorenzo Maiuri"
 git config --global user.email "maiurilorenzo@gmail.com"
 git config --global core.autocrlf input
@@ -14,7 +14,7 @@ git config --global alias.st status
 git config --global core.editor "code --wait"
 
 # --- PowerShell profile setup ---
-Write-Host "→ Setting up PowerShell profile..."
+Write-Host "Setting up PowerShell profile..."
 
 $profilePath = $PROFILE.CurrentUserAllHosts
 Write-Host "PowerShell profile path: $profilePath"
@@ -45,26 +45,26 @@ if (-not (Test-Path $profilePath)) {
 
 if (-not (Get-Content $profilePath | Select-String 'Import-Module oh-my-posh')) {
     Add-Content -Path $profilePath -Value $profileContent -Encoding UTF8
-    Write-Host "✔ PowerShell profile updated at $profilePath"
+    Write-Host "PowerShell profile updated at $profilePath"
 } else {
-    Write-Host "✔ PowerShell profile already configured, skipping."
+    Write-Host "PowerShell profile already configured, skipping."
 }
 
 # --- Set Execution Policy ---
-Write-Host "→ Setting PowerShell execution policy..."
+Write-Host "Setting PowerShell execution policy..."
 Set-ExecutionPolicy RemoteSigned -Scope CurrentUser -Force
 
 # --- Install PowerShell modules ---
-Write-Host "→ Installing PowerShell modules..."
+Write-Host "Installing PowerShell modules..."
 
 $modules = @("PSReadLine", "Terminal-Icons")
 foreach ($mod in $modules) {
     if (Get-Module -ListAvailable -Name $mod) {
-        Write-Host "✔ Module $mod already installed"
+        Write-Host "Module $mod already installed"
     } else {
         try {
             Install-Module $mod -Scope CurrentUser -Force -ErrorAction Stop
-            Write-Host "✔ Installed module: $mod"
+            Write-Host "Installed module: $mod"
         } catch {
             Write-Host "Failed to install module: $mod — $_" -ForegroundColor Yellow
         }
@@ -72,7 +72,7 @@ foreach ($mod in $modules) {
 }
 
 # --- VS Code Extensions ---
-Write-Host "→ Installing VS Code extensions..."
+Write-Host "Installing VS Code extensions..."
 
 $extensions = @(
     "ms-dotnettools.csharp",
@@ -96,7 +96,7 @@ if (Get-Command code -ErrorAction SilentlyContinue) {
 }
 
 # --- WSL Installation and Debian Setup ---
-Write-Host "→ Checking WSL installation..."
+Write-Host "Checking WSL installation..."
 
 $wslFeature = Get-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux
 $vmPlatform = Get-WindowsOptionalFeature -Online -FeatureName VirtualMachinePlatform
@@ -107,7 +107,7 @@ if ($wslFeature.State -ne 'Enabled' -or $vmPlatform.State -ne 'Enabled') {
     Enable-WindowsOptionalFeature -Online -FeatureName VirtualMachinePlatform -NoRestart
     Write-Host "A reboot is required to complete WSL setup." -ForegroundColor Yellow
 } else {
-    Write-Host "✔ WSL and Virtual Machine Platform already enabled."
+    Write-Host "WSL and Virtual Machine Platform already enabled."
 }
 
 # Check if Debian is already installed
