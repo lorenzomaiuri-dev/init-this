@@ -1,4 +1,4 @@
-Write-Host "🛠 Setting up devtoolchain..." -ForegroundColor Cyan
+Write-Host "Setting up devtoolchain..." -ForegroundColor Cyan
 
 # --- pipx tools ---
 Write-Host "→ Installing Python CLI tools via pipx..."
@@ -22,7 +22,7 @@ function Ensure-PipxTool {
             pipx install $ToolName
             Write-Host "✔ Installed $ToolName"
         } catch {
-            Write-Host "⚠️ Failed to install $ToolName: $_" -ForegroundColor Yellow
+            Write-Host "Failed to install $ToolName: $_" -ForegroundColor Yellow
         }
     } else {
         Write-Host "✔ $ToolName already installed"
@@ -43,7 +43,7 @@ if (Test-Path $nvmPath -and (Get-Command nvm -ErrorAction SilentlyContinue)) {
     nvm use lts
     npm install -g pnpm eslint prettier typescript
 } else {
-    Write-Host "⚠️ NVM not found, skipping Node setup." -ForegroundColor Yellow
+    Write-Host "NVM not found, skipping Node setup." -ForegroundColor Yellow
 }
 Write-Host "→ Installing global Node.js CLI tools..."
 
@@ -62,7 +62,7 @@ foreach ($tool in $rustTools) {
             cargo install $tool
             Write-Host "✔ Installed $tool"
         } catch {
-            Write-Host "⚠️ Failed to install $tool: $_" -ForegroundColor Yellow
+            Write-Host "Failed to install $tool: $_" -ForegroundColor Yellow
         }
     } else {
         Write-Host "✔ $tool already installed"
@@ -158,7 +158,7 @@ Write-Host "→ Configuring Docker & K8s CLI..."
 if (Get-Command kubectl -ErrorAction SilentlyContinue) {
     kubectl version --client
 } else {
-    Write-Host "⚠️ kubectl not found, skipping Kubernetes CLI check." -ForegroundColor Yellow
+    Write-Host "kubectl not found, skipping Kubernetes CLI check." -ForegroundColor Yellow
 }
 
 
@@ -177,12 +177,12 @@ if (Get-Command docker -ErrorAction SilentlyContinue) {
             Write-Host "✔ Ollama container already running."
         }
     } catch {
-        Write-Host "⚠️ Error during Ollama setup: $_" -ForegroundColor Yellow
+        Write-Host "Error during Ollama setup: $_" -ForegroundColor Yellow
     }
 } else {
-    Write-Host "⚠️ Docker is not installed or not in PATH, skipping Ollama setup." -ForegroundColor Yellow
+    Write-Host "Docker is not installed or not in PATH, skipping Ollama setup." -ForegroundColor Yellow
 }
 
 
 
-Write-Host "✅ Devtool setup completed." -ForegroundColor Green
+Write-Host "Devtool setup completed." -ForegroundColor Green

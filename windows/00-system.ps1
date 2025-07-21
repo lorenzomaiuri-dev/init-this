@@ -1,4 +1,4 @@
-Write-Host "🔧 Applying basic Windows system configuration..." -ForegroundColor Cyan
+Write-Host "Applying basic Windows system configuration..." -ForegroundColor Cyan
 
 function Set-RegValue {
     param (
@@ -12,9 +12,9 @@ function Set-RegValue {
             New-Item -Path $Path -Force | Out-Null
         }
         Set-ItemProperty -Path $Path -Name $Name -Value $Value -ErrorAction Stop
-        Write-Host "✔ Set $Name in $Path to $Value"
+        Write-Host "Set $Name in $Path to $Value"
     } catch {
-        Write-Host "❌ Failed to set $Name in $Path: $_" -ForegroundColor Red
+        Write-Host "Failed to set $Name in $Path: $_" -ForegroundColor Red
     }
 }
 
@@ -26,10 +26,10 @@ function Remove-BloatwareAppx {
     foreach ($pattern in $AppPatterns) {
         Get-AppxProvisionedPackage -Online | Where-Object { $_.DisplayName -like "*$pattern*" } | ForEach-Object {
             try {
-                Write-Host "🧼 Removing provisioned package: $($_.DisplayName)"
+                Write-Host "Removing provisioned package: $($_.DisplayName)"
                 Remove-AppxProvisionedPackage -Online -PackageName $_.PackageName
             } catch {
-                Write-Host "⚠️ Failed to remove provisioned: $($_.DisplayName) — $_"
+                Write-Host "Failed to remove provisioned: $($_.DisplayName) — $_"
             }
     }
 
@@ -37,7 +37,7 @@ function Remove-BloatwareAppx {
 }
 
 
-## 🗂️ File Explorer Settings
+## File Explorer Settings
 # Show file extensions
 Set-RegValue "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" "HideFileExt" 0
 # Show hidden files and folders
@@ -50,12 +50,12 @@ Set-RegValue "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced"
 Set-RegValue "HKLM:\SYSTEM\CurrentControlSet\Control\FileSystem" "LongPathsEnabled" 1
 
 
-## 🌙 Theme and Appearance
+## Theme and Appearance
 # Enable dark mode for apps and system
 Set-RegValue "HKCU:\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize" "AppsUseLightTheme" 0
 Set-RegValue "HKCU:\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize" "SystemUsesLightTheme" 0
 
-## 🔕 Disable annoying content
+## Disable annoying content
 # Disable suggestions in Start Menu
 Set-RegValue "HKCU:\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" "SubscribedContent-338387Enabled" 0
 Set-RegValue "HKCU:\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" "ContentDeliveryAllowed" 0
@@ -64,13 +64,13 @@ Set-RegValue "HKCU:\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryMan
 Set-RegValue "HKCU:\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" "SubscribedContent-310093Enabled" 0
 # Disable tips & tricks
 Set-RegValue "HKCU:\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" "SubscribedContent-338388Enabled" 0
-# 🎮 Disable Game Bar / DVR
+# Disable Game Bar / DVR
 Set-RegValue "HKCU:\Software\Microsoft\GameBar" "ShowStartupPanel" 0
 Set-RegValue "HKCU:\Software\Microsoft\GameBar" "AllowAutoGameMode" 0
 Set-RegValue "HKCU:\Software\Microsoft\GameBar" "UseNexusForGameBarEnabled" 0
 Set-RegValue "HKCU:\System\GameConfigStore" "GameDVR_Enabled" 0
 Set-RegValue "HKCU:\Software\Microsoft\Windows\CurrentVersion\GameDVR" "AppCaptureEnabled" 0
-# 💬 Disable Feedback Hub
+# Disable Feedback Hub
 Set-RegValue "HKCU:\Software\Microsoft\Siuf\Rules" "NumberOfSIUFInPeriod" 0
 Set-RegValue "HKCU:\Software\Microsoft\Siuf\Rules" "PeriodInDays" 0
 # Disable Cortana
@@ -78,7 +78,7 @@ Set-RegValue "HKCU:\Software\Microsoft\Windows\CurrentVersion\Search" "CortanaCo
 Set-RegValue "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Windows Search" "AllowCortana" 0
 
 
-## 🔒 Privacy & Efficiency
+## Privacy & Efficiency
 # Disable "Let Windows track app launches"
 Set-RegValue "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" "Start_TrackProgs" 0
 Set-RegValue "HKLM:\SOFTWARE\Policies\Microsoft\Windows\DataCollection" "AllowTelemetry" 0
@@ -87,11 +87,11 @@ Set-RegValue "HKCU:\Software\Microsoft\Windows\CurrentVersion\ActivityHistory" "
 Set-RegValue "HKCU:\Software\Microsoft\Windows\CurrentVersion\AdvertisingInfo" "Enabled" 0
 
 
-## 📅 Taskbar & Clock
+## Taskbar & Clock
 # Show seconds in taskbar clock (Windows 11+)
 Set-RegValue "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" "ShowSecondsInSystemClock" 1
 
-## 📋 Clipboard & Input
+## Clipboard & Input
 # Set keyboard layout to Italian
 Set-RegValue "HKCU:\Keyboard Layout\Preload" "1" "00000410"  # 00000410 = IT (Italian)
 
@@ -102,7 +102,7 @@ Set-RegValue "HKCU:\Software\Microsoft\Clipboard" "EnableClipboardHistory" 1
 Set-RegValue "HKCU:\Software\Microsoft\Input\Settings" "EnableExpressiveInputShellHotkey" 1
 
 # Remove Bloatware
-Write-Host "🧹 Removing preinstalled bloatware..." -ForegroundColor Cyan
+Write-Host "Removing preinstalled bloatware..." -ForegroundColor Cyan
 $BloatwarePatterns = @(
     "Xbox", "Gaming", "Zune", "Skype", "OneNote", "Solitaire",
     "People", "GetHelp", "Getstarted", "3DBuilder", "Bing", "Weather",
@@ -119,4 +119,4 @@ if ($highPerfPlan) {
 }
 
 
-Write-Host "✅ Basic system configuration applied." -ForegroundColor Green
+Write-Host "Basic system configuration applied." -ForegroundColor Green

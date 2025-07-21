@@ -1,4 +1,4 @@
-Write-Host "🧹 Running post-install cleanup and optimizations..." -ForegroundColor Cyan
+Write-Host "Running post-install cleanup and optimizations..." -ForegroundColor Cyan
 
 # Clear Windows Update cache
 Write-Host "→ Clearing Windows Update cache..."
@@ -19,6 +19,6 @@ Clear-History
 # TODO: privay.sexy
 # use various external tools https://pastebin.com/S5VKBirt
 
-Write-Host "✅ Post-install cleanup and tweaks completed."
+Write-Host "Post-install cleanup and tweaks completed."
 
-Write-Host "🔄 It is recommended to restart your computer to apply all changes." -ForegroundColor Yellow
+Write-Host "It is recommended to restart your computer to apply all changes." -ForegroundColor Yellow

@@ -1,4 +1,4 @@
-Write-Host "⚙️ Configuring development environment..." -ForegroundColor Cyan
+Write-Host "Configuring development environment..." -ForegroundColor Cyan
 
 # --- Git configuration ---
 Write-Host "→ Configuring Git..."
@@ -17,7 +17,7 @@ git config --global core.editor "code --wait"
 Write-Host "→ Setting up PowerShell profile..."
 
 $profilePath = $PROFILE.CurrentUserAllHosts
-Write-Host "📄 PowerShell profile path: $profilePath"
+Write-Host "PowerShell profile path: $profilePath"
 
 $profileContent = @"
 Import-Module oh-my-posh
@@ -66,7 +66,7 @@ foreach ($mod in $modules) {
             Install-Module $mod -Scope CurrentUser -Force -ErrorAction Stop
             Write-Host "✔ Installed module: $mod"
         } catch {
-            Write-Host "⚠️ Failed to install module: $mod — $_" -ForegroundColor Yellow
+            Write-Host "Failed to install module: $mod — $_" -ForegroundColor Yellow
         }
     }
 }
@@ -92,7 +92,7 @@ if (Get-Command code -ErrorAction SilentlyContinue) {
         code --install-extension $ext --force
     }
 } else {
-    Write-Host "⚠️ VS Code CLI not found. Skipping extension installation." -ForegroundColor Yellow
+    Write-Host "VS Code CLI not found. Skipping extension installation." -ForegroundColor Yellow
 }
 
 # --- WSL Installation and Debian Setup ---
@@ -102,10 +102,10 @@ $wslFeature = Get-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-
 $vmPlatform = Get-WindowsOptionalFeature -Online -FeatureName VirtualMachinePlatform
 
 if ($wslFeature.State -ne 'Enabled' -or $vmPlatform.State -ne 'Enabled') {
-    Write-Host "🔧 Enabling WSL and Virtual Machine Platform..."
+    Write-Host "Enabling WSL and Virtual Machine Platform..."
     Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux -NoRestart
     Enable-WindowsOptionalFeature -Online -FeatureName VirtualMachinePlatform -NoRestart
-    Write-Host "⚠️ A reboot is required to complete WSL setup." -ForegroundColor Yellow
+    Write-Host "A reboot is required to complete WSL setup." -ForegroundColor Yellow
 } else {
     Write-Host "✔ WSL and Virtual Machine Platform already enabled."
 }
@@ -114,16 +114,16 @@ if ($wslFeature.State -ne 'Enabled' -or $vmPlatform.State -ne 'Enabled') {
 $debianInstalled = wsl --list --quiet | Select-String -Pattern "Debian"
 
 if (-not $debianInstalled) {
-    Write-Host "📦 Installing Debian for WSL..."
+    Write-Host "Installing Debian for WSL..."
     winget install --id Debian.Debian --source winget --accept-package-agreements --accept-source-agreements
-    Write-Host "✅ Debian installed. You may need to launch it manually to complete initialization." -ForegroundColor Green
+    Write-Host "Debian installed. You may need to launch it manually to complete initialization." -ForegroundColor Green
 } else {
-    Write-Host "✔ Debian is already installed in WSL."
+    Write-Host "Debian is already installed in WSL."
 }
 
 # Set default WSL distro to Debian
-Write-Host "🔧 Setting Debian as the default WSL distro..."
+Write-Host "Setting Debian as the default WSL distro..."
 wsl --set-default Debian
 
 
-Write-Host "⚙️ Development environment configuration completed." -ForegroundColor Green
+Write-Host "Development environment configuration completed." -ForegroundColor Green
