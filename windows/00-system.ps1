@@ -14,7 +14,7 @@ function Set-RegValue {
         Set-ItemProperty -Path $Path -Name $Name -Value $Value -ErrorAction Stop
         Write-Host "Set $Name in $Path to $Value"
     } catch {
-        Write-Host "Failed to set $Name in $Path: $_" -ForegroundColor Red
+        Write-Host "Failed to set $Name in $Path : $_" -ForegroundColor Red
     }
 }
 
@@ -101,22 +101,24 @@ Set-RegValue "HKCU:\Software\Microsoft\Clipboard" "EnableClipboardHistory" 1
 # Enable Emoji panel with Win + .
 Set-RegValue "HKCU:\Software\Microsoft\Input\Settings" "EnableExpressiveInputShellHotkey" 1
 
-# Remove Bloatware
-Write-Host "Removing preinstalled bloatware..." -ForegroundColor Cyan
-$BloatwarePatterns = @(
-    "Xbox", "Gaming", "Zune", "Skype", "OneNote", "Solitaire",
-    "People", "GetHelp", "Getstarted", "3DBuilder", "Bing", "Weather",
-    "Maps", "Wallet", "YourPhone", "FeedbackHub", "MixedReality", "News"
-)
+# # Remove Bloatware
+# Write-Host "Removing preinstalled bloatware..." -ForegroundColor Cyan
+# $BloatwarePatterns = @(
+#     "Xbox", "Gaming", "Zune", "Skype", "OneNote", "Solitaire",
+#     "People", "GetHelp", "Getstarted", "3DBuilder", "Bing", "Weather",
+#     "Maps", "Wallet", "YourPhone", "FeedbackHub", "MixedReality", "News"
+# )
 
-Remove-BloatwareAppx -AppPatterns $BloatwarePatterns
+# Remove-BloatwareAppx -AppPatterns $BloatwarePatterns
 
-# Set Power Plan to High Performance
-Write-Host "Setting power plan to High Performance..."
-$highPerfPlan = powercfg -list | Where-Object { $_ -match "High performance" } | ForEach-Object { ($_ -split ' ')[3] }
-if ($highPerfPlan) {
-    powercfg -setactive $highPerfPlan
-}
+# # Set Power Plan to High Performance
+# Write-Host "Setting power plan to High Performance..."
+# $highPerfPlan = powercfg -list | Where-Object { $_ -match "High performance" } | ForEach-Object { ($_ -split ' ')[3] }
+# if ($highPerfPlan) {
+#     powercfg -setactive $highPerfPlan
+# }
 
+# Enable Hyper-V
+Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V -All
 
 Write-Host "Basic system configuration applied." -ForegroundColor Green

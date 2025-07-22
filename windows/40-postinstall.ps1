@@ -16,9 +16,6 @@ Remove-Item "$env:LOCALAPPDATA\Packages\Microsoft.DesktopAppInstaller_8wekyb3d8b
 
 Clear-History
 
-# TODO: privay.sexy
-# use various external tools https://pastebin.com/S5VKBirt
-
 Write-Host "Post-install cleanup and tweaks completed."
 
 Write-Host "It is recommended to restart your computer to apply all changes." -ForegroundColor Yellow

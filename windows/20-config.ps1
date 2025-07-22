@@ -14,45 +14,41 @@ git config --global alias.st status
 git config --global core.editor "code --wait"
 
 # --- PowerShell profile setup ---
-Write-Host "Setting up PowerShell profile..."
+# Write-Host "Setting up PowerShell profile..."
 
-$profilePath = $PROFILE.CurrentUserAllHosts
-Write-Host "PowerShell profile path: $profilePath"
+# $profilePath = $PROFILE.CurrentUserAllHosts
+# Write-Host "PowerShell profile path: $profilePath"
 
-$profileContent = @"
-Import-Module oh-my-posh
-Set-PoshPrompt -Theme paradox
+# $profileContent = @"
+# Import-Module oh-my-posh
+# Set-PoshPrompt -Theme paradox
 
-# Custom Aliases
-Set-Alias gs git status
-Set-Alias gc git commit
-Set-Alias gp git push
+# # Custom Aliases
+# Set-Alias gs git status
+# Set-Alias gc git commit
+# Set-Alias gp git push
 
-# PSReadLine options
-Set-PSReadLineOption -EditMode Emacs
-Set-PSReadLineOption -PredictionSource History
+# # PSReadLine options
+# Set-PSReadLineOption -EditMode Emacs
+# Set-PSReadLineOption -PredictionSource History
 
-# Terminal Icons
-Import-Module Terminal-Icons
+# # Terminal Icons
+# Import-Module Terminal-Icons
 
-# Environment variables
-# $env:MY_ENV_VAR = 'value'
-"@
+# # Environment variables
+# # $env:MY_ENV_VAR = 'value'
+# "@
 
-if (-not (Test-Path $profilePath)) {
-    New-Item -ItemType File -Path $profilePath -Force | Out-Null
-}
+# if (-not (Test-Path $profilePath)) {
+#     New-Item -ItemType File -Path $profilePath -Force | Out-Null
+# }
 
-if (-not (Get-Content $profilePath | Select-String 'Import-Module oh-my-posh')) {
-    Add-Content -Path $profilePath -Value $profileContent -Encoding UTF8
-    Write-Host "PowerShell profile updated at $profilePath"
-} else {
-    Write-Host "PowerShell profile already configured, skipping."
-}
-
-# --- Set Execution Policy ---
-Write-Host "Setting PowerShell execution policy..."
-Set-ExecutionPolicy RemoteSigned -Scope CurrentUser -Force
+# if (-not (Get-Content $profilePath | Select-String 'Import-Module oh-my-posh')) {
+#     Add-Content -Path $profilePath -Value $profileContent -Encoding UTF8
+#     Write-Host "PowerShell profile updated at $profilePath"
+# } else {
+#     Write-Host "PowerShell profile already configured, skipping."
+# }
 
 # --- Install PowerShell modules ---
 Write-Host "Installing PowerShell modules..."
@@ -123,6 +119,7 @@ if (-not $debianInstalled) {
 
 # Set default WSL distro to Debian
 Write-Host "Setting Debian as the default WSL distro..."
+wsl --install Debian
 wsl --set-default Debian
 
 

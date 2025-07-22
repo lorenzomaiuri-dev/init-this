@@ -5,6 +5,10 @@ if (-not ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdenti
     exit
 }
 
+# --- Set Execution Policy ---
+Write-Host "Setting PowerShell execution policy..."
+Set-ExecutionPolicy RemoteSigned -Scope CurrentUser -Force
+
 # TODO: WINGET SETUP
 
 Write-Host "Checking for winget updates..." -ForegroundColor Cyan

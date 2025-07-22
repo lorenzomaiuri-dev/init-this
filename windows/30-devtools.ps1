@@ -22,7 +22,7 @@ function Ensure-PipxTool {
             pipx install $ToolName
             Write-Host "Installed $ToolName"
         } catch {
-            Write-Host "Failed to install $ToolName: $_" -ForegroundColor Yellow
+            Write-Host "Failed to install $ToolName : $_" -ForegroundColor Yellow
         }
     } else {
         Write-Host "$ToolName already installed"
@@ -62,7 +62,7 @@ foreach ($tool in $rustTools) {
             cargo install $tool
             Write-Host "Installed $tool"
         } catch {
-            Write-Host "Failed to install $tool: $_" -ForegroundColor Yellow
+            Write-Host "Failed to install $tool : $_" -ForegroundColor Yellow
         }
     } else {
         Write-Host "$tool already installed"
@@ -122,34 +122,34 @@ if (-not (dotnet tool list -g | Select-String "dotnet-ef")) {
 }
 
 # --- Flutter SDK Manual Install ---
-Write-Host "Installing Flutter SDK manually..."
+# Write-Host "Installing Flutter SDK manually..."
 
-$flutterZipUrl = "https://storage.googleapis.com/flutter_infra_release/releases/stable/windows/flutter_windows_3.13.5-stable.zip"
-$installPath = "$env:LOCALAPPDATA\flutter"
-$zipFile = "$env:TEMP\flutter_sdk.zip"
+# $flutterZipUrl = "https://storage.googleapis.com/flutter_infra_release/releases/stable/windows/flutter_windows_3.13.5-stable.zip"
+# $installPath = "$env:LOCALAPPDATA\flutter"
+# $zipFile = "$env:TEMP\flutter_sdk.zip"
 
-if (-not (Test-Path $installPath)) {
-    Invoke-WebRequest -Uri $flutterZipUrl -OutFile $zipFile
-    Expand-Archive -Path $zipFile -DestinationPath $env:LOCALAPPDATA -Force
-    Remove-Item $zipFile
-    Write-Host "Flutter SDK extracted to $installPath"
-} else {
-    Write-Host "Flutter SDK already installed at $installPath"
-}
+# if (-not (Test-Path $installPath)) {
+#     Invoke-WebRequest -Uri $flutterZipUrl -OutFile $zipFile
+#     Expand-Archive -Path $zipFile -DestinationPath $env:LOCALAPPDATA -Force
+#     Remove-Item $zipFile
+#     Write-Host "Flutter SDK extracted to $installPath"
+# } else {
+#     Write-Host "Flutter SDK already installed at $installPath"
+# }
 
-# Add Flutter to PATH if not present
-$flutterBinPath = "$installPath\flutter\bin"
-if (-not ($env:Path -like "*$flutterBinPath*")) {
-    Write-Host "Adding Flutter to PATH..."
-    [Environment]::SetEnvironmentVariable("Path", $env:Path + ";$flutterBinPath", [EnvironmentVariableTarget]::User)
-    $env:Path += ";$flutterBinPath"
-} else {
-    Write-Host "Flutter already in PATH"
-}
+# # Add Flutter to PATH if not present
+# $flutterBinPath = "$installPath\flutter\bin"
+# if (-not ($env:Path -like "*$flutterBinPath*")) {
+#     Write-Host "Adding Flutter to PATH..."
+#     [Environment]::SetEnvironmentVariable("Path", $env:Path + ";$flutterBinPath", [EnvironmentVariableTarget]::User)
+#     $env:Path += ";$flutterBinPath"
+# } else {
+#     Write-Host "Flutter already in PATH"
+# }
 
-# Run flutter doctor
-Write-Host "Running flutter doctor..."
-flutter doctor
+# # Run flutter doctor
+# Write-Host "Running flutter doctor..."
+# flutter doctor
 
 # TODO: ODBC
 
