@@ -70,7 +70,7 @@ Install-App -Id "Microsoft.AzureCLI" -Name "Azure CLI"
 Install-App -Id "Google.CloudSDK" -Name "Google Cloud SDK"
 Install-App -Id "Amazon.AWSCLI" -Name "AWS CLI"
 Install-App -Id "Hashicorp.Terraform" -Name "Terraform"
-Install-App -Id "OpenVPNTechnologies.OpenVPN" -Name "OpenVPN"
+Install-App -Id "OpenVPNTechnologies.OpenVPNConnect" -Name "OpenVPNConnect"
 Install-App -Id "Ngrok.Ngrok" -Name "ngrok"
 
 # Containerization / Virtualization
