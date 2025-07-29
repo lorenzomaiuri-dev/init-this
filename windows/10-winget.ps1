@@ -56,6 +56,7 @@ Install-App -Id "Google.AndroidStudio" -Name "Android Studio"
 Install-App -Id "Postman.Postman" -Name "Postman"
 
 # Database & Data Tools
+Install-App -Id "dbeaver.dbeaver" -Name "DBeaver"
 Install-App -Id "DBVis.DBVisualizer" -Name "DBVisualizer"
 Install-App -Id "MongoDB.Compass.Community" -Name "MongoDB Compass Community"
 Install-App -Id "PostgreSQL.pgAdmin" -Name "pgAdmin"
