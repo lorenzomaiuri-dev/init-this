@@ -28,7 +28,7 @@ sudo apt install -y golang-go
 
 echo "==> Installing Node.js via NVM..."
 if [ ! -d "$HOME/.nvm" ]; then
-  curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+  curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
 fi
 
 export NVM_DIR="$HOME/.nvm"
